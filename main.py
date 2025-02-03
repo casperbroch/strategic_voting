@@ -1,5 +1,5 @@
 from tva.btva import BTVA
-from tva.happiness import compute_average_happiness
+from tva.happiness import compute_sum_happiness
 
 def main():
     preferences = [
@@ -12,11 +12,11 @@ def main():
     btva = BTVA(scheme="plurality")
     
     outcome, happiness_scores = btva.analyse(preferences)
-    avg_happiness = compute_average_happiness(happiness_scores)
+    sum_happiness = compute_sum_happiness(happiness_scores)
     
     print(f"Voting Outcome: {outcome}")
     print(f"Happiness Levels per User: {happiness_scores}")
-    print(f"Average Happiness: {avg_happiness}")
+    print(f"Sum of Happiness: {sum_happiness}")
 
 
 
