@@ -22,4 +22,5 @@ class BTVA:
         happiness_scores = compute_happiness(preferences, winners)
         risk = compute_risk(preferences, winners)
 
+
         return outcome, happiness_scores, risk

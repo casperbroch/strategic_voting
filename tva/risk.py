@@ -3,25 +3,33 @@ from tva.voting_schemes import plurality_voting
 from itertools import combinations
 
 def compute_risk(preferences, outcome):
-        
     if len(outcome) != 1:
         return math.inf
     else:
         outcome = outcome[0]
-    
+
     original_winner = outcome
     num_voters = len(preferences)
-    num_parties = len(preferences[0])
-    
+
+    # Prioritize voters who currently rank the winner highest (they are the most impactful)
+    voter_priority = sorted(
+        range(num_voters), 
+        key=lambda v: preferences[v].index(original_winner)
+    )
+
     for k in range(1, num_voters + 1):
-        for voters_to_change in combinations(range(num_voters), k):
-            modified_prefs = [list(pref) for pref in preferences]
-            
+        print(f"Checking {k}-voter combinations...")
+
+        for voters_to_change in combinations(voter_priority, k):
+            backup_prefs = [preferences[v][:] for v in voters_to_change]
+
             for voter in voters_to_change:
-                modified_prefs[voter] = [c for c in modified_prefs[voter] if c != original_winner]
-                if not modified_prefs[voter]:
-                    continue
-            new_outcome = plurality_voting(modified_prefs)
+                preferences[voter].remove(original_winner)
+
+            new_outcome = plurality_voting(preferences)
+
+            for idx, voter in enumerate(voters_to_change):
+                preferences[voter] = backup_prefs[idx]
 
             if len(new_outcome) != 1:
                 continue
@@ -29,6 +37,6 @@ def compute_risk(preferences, outcome):
                 new_outcome = new_outcome[0]
 
             if new_outcome != original_winner:
-                return k  
-    
+                return k 
+
     return math.inf 
