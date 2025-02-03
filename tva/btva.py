@@ -1,5 +1,6 @@
 from tva.voting_schemes import plurality_voting
 from tva.happiness import compute_happiness
+from tva.risk import compute_risk
 
 class BTVA:
     def __init__(self, scheme):
@@ -19,4 +20,6 @@ class BTVA:
             raise ValueError("Unsupported voting scheme")
         
         happiness_scores = compute_happiness(preferences, winners)
-        return outcome, happiness_scores
+        risk = compute_risk(preferences, winners)
+
+        return outcome, happiness_scores, risk
