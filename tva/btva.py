@@ -6,6 +6,10 @@ class BTVA:
 
     def analyse(self, preferences):
         if self.scheme == "plurality":
-            return plurality_voting(preferences)
+            winners = plurality_voting(preferences)
+            
+            if len(winners) > 1:
+                return f"a tie has been detected between: {winners}"
+            return plurality_voting(preferences)[0]
         else:
             raise ValueError("Unsupported voting scheme")

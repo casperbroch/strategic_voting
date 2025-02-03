@@ -2,9 +2,9 @@ from tva.btva import BTVA
 
 def main():
     preferences = [
-        ["A", "B", "C"],
-        ["B", "A", "C"],
-        ["A", "C", "B"],
+        ["B", "B", "C"],
+        ["A", "A", "C"],
+        ["B", "C", "B"],
         ["C", "A", "B"],
         ["A", "B", "C"]
     ]
