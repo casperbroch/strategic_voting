@@ -1,4 +1,5 @@
 from tva.voting_schemes import plurality_voting
+from tva.happiness import compute_happiness
 
 class BTVA:
     def __init__(self, scheme):
@@ -9,10 +10,13 @@ class BTVA:
             winners = plurality_voting(preferences)
             
             if len(winners) > 1:
-                return f"a tie has been detected between: {winners}"
+                outcome = f"a tie has been detected between: {winners}"
             elif len(winners) == 1:
-                return plurality_voting(preferences)[0]
+                outcome = plurality_voting(preferences)[0]
             else:
-                return f"no winner found"
+                outcome = f"no winner found"
         else:
             raise ValueError("Unsupported voting scheme")
+        
+        happiness_scores = compute_happiness(preferences, winners)
+        return outcome, happiness_scores

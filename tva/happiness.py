@@ -1,0 +1,23 @@
+import math
+
+def compute_happiness(preferences, outcome):
+    happiness_scores = {}
+
+    if len(outcome) != 1:
+        for i in range(len(preferences)):
+            happiness_scores[i] = math.nan
+    else:
+        outcome = outcome[0]
+        for i, voter_pref in enumerate(preferences):
+            rank = voter_pref.index(outcome)
+            happiness_scores[i] = len(voter_pref) - rank
+    
+    return happiness_scores
+
+def compute_average_happiness(happiness_scores):
+    valid_scores = [score for score in happiness_scores.values() if not math.isnan(score)]
+    
+    if not valid_scores:
+        return math.nan
+    
+    return sum(valid_scores) / len(valid_scores)
