@@ -10,6 +10,9 @@ class BTVA:
             
             if len(winners) > 1:
                 return f"a tie has been detected between: {winners}"
-            return plurality_voting(preferences)[0]
+            elif len(winners) == 1:
+                return plurality_voting(preferences)[0]
+            else:
+                return f"no winner found"
         else:
             raise ValueError("Unsupported voting scheme")
