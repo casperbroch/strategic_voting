@@ -3,11 +3,6 @@ from tva.voting_schemes import plurality_voting
 from itertools import combinations
 
 def compute_risk(preferences, outcome):
-    if len(outcome) != 1:
-        return math.inf
-    else:
-        outcome = outcome[0]
-
     original_winner = outcome
     num_voters = len(preferences)
 
