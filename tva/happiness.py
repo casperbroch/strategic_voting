@@ -3,14 +3,9 @@ import math
 def compute_happiness(preferences, outcome):
     happiness_scores = {}
 
-    if len(outcome) != 1:
-        for i in range(len(preferences)):
-            happiness_scores[i] = math.nan
-    else:
-        outcome = outcome[0]
-        for i, voter_pref in enumerate(preferences):
-            rank = voter_pref.index(outcome)
-            happiness_scores[i] = len(voter_pref) - rank
+    for i, voter_pref in enumerate(preferences):
+        rank = voter_pref.index(outcome)
+        happiness_scores[i] = len(voter_pref) - rank
     
     return happiness_scores
 

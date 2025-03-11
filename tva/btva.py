@@ -26,8 +26,8 @@ class BTVA:
         else:
             outcome = f"no winner found"
         
-        happiness_scores = compute_happiness(preferences, winners)
-        risk = compute_risk(preferences, winners)
+        happiness_scores = compute_happiness(preferences, outcome)
+        risk = compute_risk(preferences, outcome)
 
 
         return outcome, happiness_scores, risk
