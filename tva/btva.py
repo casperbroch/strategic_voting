@@ -6,7 +6,7 @@ class BTVA:
     def __init__(self, scheme):
         self.scheme = scheme
 
-    def analyse(self, preferences):
+    def analyse(self, preferences, num_parties):
         if self.scheme == "plurality":
             winners = plurality_voting(preferences)
         elif self.scheme == "voting2":
@@ -20,13 +20,13 @@ class BTVA:
             
         if len(winners) > 1:
             outcome = sorted(winners)[0]
-            print(f"a tie has been detected between: {winners}, the winner: {outcome}")
+            #print(f"a tie has been detected between: {winners}, the winner: {outcome}")
         elif len(winners) == 1:
             outcome = winners[0]
         else:
             outcome = f"no winner found"
         
-        happiness_scores = compute_happiness(preferences, outcome)
+        happiness_scores = compute_happiness(preferences, outcome, num_parties)
         risk = compute_risk(preferences, outcome)
 
 

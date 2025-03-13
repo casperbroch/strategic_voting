@@ -13,7 +13,9 @@ def main():
 
     # 66% sampling
     sample_size = int(N*0.66)
-    polled_prefs = simulate_poll(preferences, sample_size)
+    trunc_range = 3
+    noise_range = [0.0,0.5]
+    polled_prefs = simulate_poll(preferences, sample_size, trunc_range, noise_range)
 
     print("\n=== Polled (Noisy) Preferences ===")
     for i, prefs in enumerate(polled_prefs):

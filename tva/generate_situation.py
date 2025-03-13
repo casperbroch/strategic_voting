@@ -21,7 +21,7 @@ def generate_preferences(M, N):
 
 import random
 
-def simulate_poll(preferences, sample_size):
+def simulate_poll(preferences, sample_size, trunc_range, noise_range):
     """
     1) Randomly select 'sample_size' voters from the full 'preferences'.
     2) For each selected voter, randomly decide how many top preferences we actually
@@ -44,11 +44,11 @@ def simulate_poll(preferences, sample_size):
         voter_pref = preferences[idx][:]
 
         # STEP A: Decide how many top preferences we observe (1 to 3, or up to M if M < 3)
-        top_k = random.randint(1, min(M, 3))
+        top_k = random.randint(2, min(M, trunc_range))
         truncated_pref = voter_pref[:top_k]
 
         # Assign a random noise probability to THIS voter
-        voter_noise_prob = random.uniform(0.0, 0.5)
+        voter_noise_prob = random.uniform(noise_range[0], noise_range[1])
 
         #With probability voter_noise_prob, swap one adjacent pair
         if random.random() < voter_noise_prob and len(truncated_pref) > 1:

@@ -1,12 +1,14 @@
 import math
 
-def compute_happiness(preferences, outcome):
+def compute_happiness(preferences, outcome, num_parties):
     happiness_scores = {}
 
     for i, voter_pref in enumerate(preferences):
-        rank = voter_pref.index(outcome)
-        happiness_scores[i] = len(voter_pref) - rank
-    
+        if voter_pref[0] == outcome:
+             happiness_scores[i] = 1
+        else: 
+            happiness_scores[i] = 0
+
     return happiness_scores
 
 def compute_sum_happiness(happiness_scores):
