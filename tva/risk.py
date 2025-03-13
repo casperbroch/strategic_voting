@@ -2,7 +2,7 @@ import math
 from tva.voting_schemes import plurality_voting
 from itertools import combinations
 
-def compute_risk(preferences, outcome):
+def compute_risk(preferences, outcome, scheme='plurality'):
     original_winner = outcome
     num_voters = len(preferences)
 
@@ -11,6 +11,8 @@ def compute_risk(preferences, outcome):
         range(num_voters), 
         key=lambda v: preferences[v].index(original_winner)
     )
+    
+    M = len(preferences[0])
 
     for k in range(1, num_voters + 1):
         print(f"Checking {k}-voter combinations...")
@@ -21,7 +23,17 @@ def compute_risk(preferences, outcome):
             for voter in voters_to_change:
                 preferences[voter].remove(original_winner)
 
-            new_outcome = plurality_voting(preferences)
+            if scheme == 'plurality':
+                new_outcome = plurality_voting(preferences)
+            elif scheme == 'voting2':
+                new_outcome = winners_voting_vectors(convert_to_votingfor2(preferences, M))
+            elif scheme == 'antiplurality': 
+                new_outcome = winners_voting_vectors(convert_to_antiplurality(preferences, M))
+            elif scheme == 'borda':
+                new_outcome = winners_voting_vectors(convert_to_borda(preferences, M))
+            else:
+                raise ValueError("Unsupported voting scheme")
+                
 
             for idx, voter in enumerate(voters_to_change):
                 preferences[voter] = backup_prefs[idx]
