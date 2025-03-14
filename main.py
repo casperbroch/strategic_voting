@@ -11,7 +11,7 @@ def main():
 
     btva = BTVA(scheme="plurality")
     
-    outcome, happiness_scores, risk = btva.analyse(preferences)
+    outcome, happiness_scores, risk, counter_results = btva.analyse(preferences)
 
     sum_happiness = compute_sum_happiness(happiness_scores)
     
