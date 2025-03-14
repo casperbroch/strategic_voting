@@ -9,9 +9,9 @@ def main():
     for i, prefs in enumerate(preferences):
         print(f"User {i+1} preference list: {prefs}")
 
-    btva = BTVA(scheme="plurality")
+    btva = BTVA(scheme="borda")
     
-    outcome, happiness_scores, risk, counter_results = btva.analyse(preferences)
+    outcome, happiness_scores, risk, counter_results, changes = btva.analyse(preferences)
 
     sum_happiness = compute_sum_happiness(happiness_scores)
     
