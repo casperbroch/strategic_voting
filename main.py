@@ -3,8 +3,8 @@ from tva.happiness import compute_sum_happiness
 from tva.generate_situation import generate_preferences
 
 def main():
-    M = 5  # Number of parties
-    N = 25  # Number of users
+    M = 3  # Number of parties
+    N = 5  # Number of users
     preferences = generate_preferences(M, N)
     for i, prefs in enumerate(preferences):
         print(f"User {i+1} preference list: {prefs}")
@@ -15,6 +15,8 @@ def main():
 
     sum_happiness = compute_sum_happiness(happiness_scores)
     
+    
+    
     print(f"Voting Outcome: {outcome}")
     print(f"Happiness Levels per User: {happiness_scores}")
     print(f"Sum of Happiness: {sum_happiness}")
@@ -24,3 +26,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+    
+    
