@@ -7,14 +7,15 @@ class BTVA:
         self.scheme = scheme
 
     def analyse(self, preferences):
+        M = len(preferences[0])
         if self.scheme == "plurality":
             winners = plurality_voting(preferences)
         elif self.scheme == "voting2":
-            winners = winners_voting_vectors(convert_to_votingfor2(preferences))
+            winners = winners_voting_vectors(convert_to_votingfor2(preferences, M))
         elif self.scheme == "antiplurality":
-            winners = winners_voting_vectors(convert_to_antiplurality(preferences))
+            winners = winners_voting_vectors(convert_to_antiplurality(preferences, M))
         elif self.scheme == "borda":
-            winners = winners_voting_vectors(convert_to_borda(preferences))
+            winners = winners_voting_vectors(convert_to_borda(preferences, M))
         else:
             raise ValueError("Unsupported voting scheme")
             

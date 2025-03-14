@@ -9,6 +9,9 @@ def switch_ranking(preferences, k=np.inf):
         if len(preferences[i]) > 1:
             idx1, idx2 = np.random.randint(len(preferences[i]), size=2) # in case of same values nothing changes
             preferences[i][idx1], preferences[i][idx2] = preferences[i][idx2], preferences[i][idx1]  
+    print('Compromising/burying')
+    for i, prefs in enumerate(preferences):
+        print(f"User {i+1} new preference list: {prefs}")
     return preferences, preferences_to_change
 
 def bullet_voting_vectors(preferences, scheme, k=np.inf):

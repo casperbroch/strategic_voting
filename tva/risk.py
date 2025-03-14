@@ -1,5 +1,5 @@
 import math
-from tva.voting_schemes import plurality_voting
+from tva.voting_schemes import *
 from itertools import combinations
 
 def compute_risk(preferences, outcome, scheme='plurality'):
